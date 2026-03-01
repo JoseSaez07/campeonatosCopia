@@ -2,27 +2,38 @@ package es.fplumara.dam1.campeonato.repository;
 
 import es.fplumara.dam1.campeonato.model.Deportista;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-public class DeportistaRepositoryImpl  implements DeportistaRepository{
+public class DeportistaRepositoryImpl  implements DeportistaRepository {
+    private Map<String, Deportista> repositorio = new HashMap<>();
+
     @Override
     public void save(Deportista d) {
-
+        repositorio.put(d.getId(), d);
     }
 
     @Override
     public Optional<Deportista> findById(String id) {
-        return Optional.empty();
+        Deportista d = repositorio.get(id);
+        if (d == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(d);
+        }
     }
 
     @Override
     public List<Deportista> listAll() {
-        return List.of();
+        return new ArrayList<>(repositorio.values());
     }
 
     @Override
     public List<Deportista> findByPais(String pais) {
-        return List.of();
+        List<Deportista> resultado = new ArrayList<>();
+        for (Deportista es : repositorio.values())
+            if (es.getPais().equalsIgnoreCase(pais)) {
+                resultado.add(es);
+            }
+        return resultado;
     }
 }

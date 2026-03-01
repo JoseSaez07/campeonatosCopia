@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DeportistaRepository {
-    public abstract void save(Deportista d);
-    public abstract Optional<Deportista> findById(String id);
-    public abstract List<Deportista> listAll();
-    public abstract List<Deportista> findByPais(String pais);
+     void save(Deportista d);
+     Optional<Deportista> findById(String id);
+     List<Deportista> listAll();
+     List<Deportista> findByPais(String pais);
 
 }
